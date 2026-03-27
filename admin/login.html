@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login</title>
+<link rel="stylesheet" href="../styles/auth.css">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+<h2>Admin Login</h2>
+
+<input id="loginEmail" type="email" placeholder="Email">
+
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+
+</div>
+
+<script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+            import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+            import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+            const firebaseConfig = {
+            apiKey: "AIzaSyCTY5xdHocWcWWA29cjuqnKsSL5c8-LNdU",
+            authDomain: "topsy-bf414.firebaseapp.com",
+            projectId: "topsy-bf414",
+            storageBucket: "topsy-bf414.firebasestorage.app",
+            messagingSenderId: "525110262091",
+            appId: "1:525110262091:web:6fe880db6c3d22aec0d0ce",
+            measurementId: "G-XBBL95MGYW"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+
+            // Initialize Auth
+            const auth = getAuth(app);
+
+            // Initialize Firestore
+            const db = getFirestore(app);
+
+
+            // LOGIN FUNCTION
+            window.login = async function () {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if (!email || !password) {
+                alert("Please fill in both fields.");
+                return;
+            }
+
+            try {
+                // Sign in with Firebase Auth
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Check if user is in admins collection
+                const adminDoc = await getDoc(doc(db, "admins", user.uid));
+
+                if (!adminDoc.exists()) {
+                alert("Access denied. You are not an admin.");
+                return;
+                }
+
+                // Successful login
+                alert("Login successful!");
+                window.location.href = "../admin/adminpage.html"; // Redirect to admin dashboard
+
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+            };
+</script> 
+</body>
+</html>

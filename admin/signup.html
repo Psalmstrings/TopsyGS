@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Signup</title>
+<link rel="stylesheet" href="../styles/auth.css">
+
+
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+<h2>Create Admin Account</h2>
+
+<input id="signupEmail" type="email" placeholder="Email">
+
+<input id="signupPassword" type="password" placeholder="Password">
+
+<button onclick="signup()">Sign Up</button>
+
+<p>Already have an account? <a href="login.html">Login</a></p>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCTY5xdHocWcWWA29cjuqnKsSL5c8-LNdU",
+  authDomain: "topsy-bf414.firebaseapp.com",
+  projectId: "topsy-bf414",
+  storageBucket: "topsy-bf414.firebasestorage.app",
+  messagingSenderId: "525110262091",
+  appId: "1:525110262091:web:6fe880db6c3d22aec0d0ce",
+  measurementId: "G-XBBL95MGYW"
+};
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Auth
+const auth = getAuth(app);
+
+// Initialize Firestore
+const db = getFirestore(app);
+
+
+// SIGNUP FUNCTION
+window.signup = async function () {
+
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+
+  if(!email || !password){
+    alert("Please fill all fields");
+    return;
+  }
+
+  try {
+
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+    const user = userCredential.user;
+
+    // Save admin to Firestore
+    await setDoc(doc(db, "admins", user.uid), {
+      email: email,
+      role: "admin",
+      createdAt: new Date()
+    });
+
+    alert("Admin account created successfully!");
+
+    window.location.href = "../admin/login.html";
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
