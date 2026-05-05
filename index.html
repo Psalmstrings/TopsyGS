@@ -2,262 +2,708 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tospy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TGS | Precision Survey & Geoinformatics</title>
 
-<!-- Google Fonts & Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Preconnect for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Google Fonts + Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-<!-- Swiper Carousel CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+<style>
+  /* ---------- RESET & GLOBAL ---------- */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-<!-- Main CSS -->
-<link rel="stylesheet" href="./styles/index.css">
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #1e2a2e;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  section {
+    padding: 5rem 0;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1e2a2e;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subhead {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+    color: #4a5b5e;
+    font-size: 1.1rem;
+  }
+
+  /* buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    background: #ff6a00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .btn:hover {
+    background: #e05f00;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 106, 0, 0.25);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.6rem;
+    font-weight: 600;
+    border-radius: 40px;
+    text-decoration: none;
+    border: 2px solid #ff6a00;
+    color: #ff6a00;
+    background: transparent;
+    transition: 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: #ff6a00;
+    color: white;
+  }
+  .bttn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 8px;
+    font-weight: 600;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    background: #4b2409;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  /* NAVBAR */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .logo img {
+    height: 52px;
+    width: auto;
+  }
+
+  #navMenu ul {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  #navMenu ul li a {
+    text-decoration: none;
+    color: #1e2a2e;
+    font-weight: 500;
+    transition: 0.2s;
+    font-size: 0.95rem;
+  }
+
+  #navMenu ul li a:hover,
+  #navMenu ul li a.active {
+    color: #ff6a00;
+  }
+
+  .hamburger {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #ff6a00;
+  }
+
+  @media (max-width: 900px) {
+    .hamburger {
+      display: block;
+    }
+    #navMenu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      max-width: 300px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: -8px 0 25px rgba(0, 0, 0, 0.1);
+      padding: 7rem 2rem;
+      transition: right 0.3s ease;
+      z-index: 1001;
+    }
+    #navMenu.active {
+      right: 0;
+    }
+    #navMenu ul {
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 95vh;
+    background: linear-gradient(105deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.45) 100%), url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  .hero-content h1 {
+    font-size: 3.7rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .trust-badge {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+
+  /* ABOUT */
+  .about-container {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .about-text {
+    flex: 1.2;
+  }
+  .about-text h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .about-image {
+    flex: 0.8;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* SERVICES */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+  .card {
+    background: #fff;
+    padding: 2rem 1.5rem;
+    border-radius: 24px;
+    border: 1px solid #eef2f0;
+    transition: all 0.25s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: #ff6a00;
+    box-shadow: 0 20px 30px -12px rgba(255, 106, 0, 0.12);
+  }
+  .card i {
+    font-size: 2.3rem;
+    color: #ff6a00;
+    margin-bottom: 1rem;
+  }
+
+  /* STATS */
+  .stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .stat h3 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #ff6a00;
+  }
+
+  /* PORTFOLIO (Firebase powered) */
+  .portfolio {
+    background: #fafaf8;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+  }
+  .portfolio-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #edf2ef;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 32px -16px rgba(0, 0, 0, 0.12);
+    border-color: #ff6a00;
+  }
+  .portfolio-img {
+    height: 220px;
+    overflow: hidden;
+    background: #e9ecef;
+  }
+  .portfolio-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s;
+  }
+  .portfolio-card:hover .portfolio-img img {
+    transform: scale(1.03);
+  }
+  .portfolio-info {
+    padding: 1.5rem;
+  }
+  .portfolio-tag {
+    display: inline-block;
+    background: #ffefe3;
+    color: #ff6a00;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.9rem;
+    border-radius: 40px;
+    margin-bottom: 0.8rem;
+  }
+  .portfolio-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+  .portfolio-location {
+    font-size: 0.8rem;
+    color: #5f6c64;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .portfolio-desc {
+    font-size: 0.85rem;
+    color: #2c3e42;
+    line-height: 1.45;
+    margin-bottom: 1rem;
+  }
+  .portfolio-stats {
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid #edf2ef;
+    padding-top: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .portfolio-stats span:first-child {
+    color: #ff6a00;
+  }
+  .loading-spinner {
+    text-align: center;
+    padding: 3rem;
+    color: #ff6a00;
+  }
+  .empty-message {
+    text-align: center;
+    padding: 3rem;
+    color: #7e8c8d;
+  }
+
+  /* TEAM */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+  .team-card {
+    background: white;
+    border-radius: 24px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid #eef2f0;
+  }
+  .team-card img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    border: 3px solid #ff6a00;
+  }
+
+  /* CTA */
+  .cta {
+    background: #ff6a00;
+    color: white;
+    text-align: center;
+    padding: 3.5rem 2rem;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: white;
+    padding: 1.2rem 2rem;
+    border-radius: 80px;
+    border: 1px solid #eef2f0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.02);
+  }
+  .contact-card i {
+    font-size: 1.6rem;
+    color: #ff6a00;
+  }
+
+  footer {
+    background: #0f2125;
+    color: #cbd5d0;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.4rem; }
+    .section-title { font-size: 2rem; }
+    .about-container { flex-direction: column; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
 <header class="navbar">
-    <div class="logo">Topsy</div>
-    <nav>
-        <ul>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="./pages/about.html">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <div class="logo">
+    <img src="./media/TGS.png" alt="TGS Logo" style="height: 48px;">
+  </div>
+  <div class="hamburger" id="hamburger">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+  <nav id="navMenu">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="./pages/about.html">About</a></li>
+      <li><a href="./pages/services.html">Services</a></li>
+      <li><a href="./pages/projects.html">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
-<!-- HERO SECTION -->
-<section id="hero" class="hero">
-    <div class="hero-left">
-        <h1 class="animate-text">Precision in Every Measurement</h1>
-        <p class="animate-text delay-1">
-            We help businesses unlock new opportunities, improve performance, and achieve long-term success.
-        </p>
-        <a class="btn animate-text delay-2" href="#contact">Get Started</a>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-content">
+    <h1>Mapping tomorrow with <span style="color:#ffae70;">unmatched precision</span></h1>
+    <p>Trusted geospatial intelligence & engineering surveys — empowering infrastructure and land development across Nigeria.</p>
+    <a href="#contact" class="btn">Request a quote <i class="fa-solid fa-arrow-right"></i></a>
+    <div class="trust-badge">
+      <span><i class="fa-regular fa-circle-check"></i> ISO 9001 standards</span>
+      <span><i class="fa-regular fa-clock"></i> 10+ years legacy</span>
     </div>
-    <div class="hero-right animate-image">
-        <img src="assets/images/hero.png" alt="Consulting Illustration">
-    </div>
+  </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about" class="about">
+  <div class="container">
     <div class="about-container">
-        <div class="about-text animate-left">
-            <h2>About Our Company</h2>
-            <p>
-                Eagles Height Consulting Ltd is a professional consulting firm focused on delivering high-impact strategic solutions for organizations, institutions, and growing businesses.
-            </p>
-            <p>
-                Our team works with clients to improve operations, build capacity, and unlock new growth opportunities.
-            </p>
-            <a href="#services" class="btn-outline">Learn More</a>
-        </div>
-        <div class="about-image animate-right">
-            <img src="assets/images/about.jpg" alt="About Image">
-        </div>
+      <div class="about-text">
+        <h2>Beyond boundaries — where data meets reliability</h2>
+        <p>Eagles Height Consulting Ltd delivers high-impact strategic solutions, but as <strong>TGS</strong> we redefine surveying excellence. We combine cutting-edge GIS, drone mapping, and traditional accuracy to deliver actionable insights.</p>
+        <p>Our certified surveyors have worked on complex cadastral, engineering, and hydrographic projects — ensuring legal compliance, risk mitigation, and flawless execution.</p>
+        <a href="#services" class="btn-outline">Explore expertise <i class="fa-solid fa-chevron-right"></i></a>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Surveyor with drone equipment">
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services" class="services">
-    <h2 class="section-title">Our Services</h2>
+  <div class="container">
+    <h2 class="section-title">Core surveying solutions</h2>
+    <div class="section-subhead">High-precision, data-driven services for modern infrastructure and land administration</div>
     <div class="service-grid">
-        <div class="card animate-up">
-            <i class="fa-solid fa-chart-line fa-2x"></i>
-            <h3>Business Consulting</h3>
-            <p>Helping organizations improve strategy and operations.</p>
-        </div>
-        <div class="card animate-up delay-1">
-            <i class="fa-solid fa-chalkboard-user fa-2x"></i>
-            <h3>Training & Development</h3>
-            <p>Building workforce capacity and leadership skills.</p>
-        </div>
-        <div class="card animate-up delay-2">
-            <i class="fa-solid fa-magnifying-glass-chart fa-2x"></i>
-            <h3>Research</h3>
-            <p>Data-driven insights for smarter decision making.</p>
-        </div>
-        <div class="card animate-up delay-3">
-            <i class="fa-solid fa-project-diagram fa-2x"></i>
-            <h3>Project Management</h3>
-            <p>Delivering projects effectively and efficiently.</p>
-        </div>
+      <div class="card"><i class="fa-solid fa-draw-polygon"></i><h3>Cadastral Surveys</h3><p>Land demarcation, title registration, and boundary resolution with legal-grade accuracy.</p></div>
+      <div class="card"><i class="fa-solid fa-ruler-combined"></i><h3>Engineering Surveys</h3><p>Setting out, as-built, deformation monitoring for roads, bridges, and large structures.</p></div>
+      <div class="card"><i class="fa-solid fa-map"></i><h3>Mapping & Cartography</h3><p>Topographic mapping, 3D terrain models, and GIS database creation for urban planning.</p></div>
+      <div class="card"><i class="fa-solid fa-water"></i><h3>Hydrographic Surveys</h3><p>Bathymetric surveying, coastline mapping, and underwater infrastructure assessment.</p></div>
     </div>
+  </div>
 </section>
 
 <!-- STATS -->
 <section class="stats">
+  <div class="container">
     <div class="stats-grid">
-        <div class="stat animate-up">
-            <h3>100+</h3>
-            <p>Projects Completed</p>
-        </div>
-        <div class="stat animate-up delay-1">
-            <h3>50+</h3>
-            <p>Happy Clients</p>
-        </div>
-        <div class="stat animate-up delay-2">
-            <h3>10+</h3>
-            <p>Years of Experience</p>
-        </div>
+      <div class="stat"><h3>150+</h3><p>Projects delivered</p></div>
+      <div class="stat"><h3>98%</h3><p>Client retention</p></div>
+      <div class="stat"><h3>12+</h3><p>Years experience</p></div>
+      <div class="stat"><h3>±2mm</h3><p>Precision grade</p></div>
     </div>
+  </div>
 </section>
 
-<!-- PORTFOLIO -->
+<!-- PORTFOLIO - DYNAMIC FROM FIRESTORE -->
 <section id="portfolio" class="portfolio">
-    <h2 class="section-title">Our Projects</h2>
-
-    <!-- Swiper Carousel -->
-    <div class="swiper-container">
-        <div id="portfolioContainer" class="swiper-wrapper"></div>
-
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+  <div class="container">
+    <h2 class="section-title">Signature projects</h2>
+    <div class="section-subhead">From master-planned communities to energy infrastructure — real results that build trust</div>
+    <div id="portfolioContainer" class="portfolio-grid">
+      <div class="loading-spinner"><i class="fa-solid fa-spinner fa-pulse"></i> Loading projects...</div>
     </div>
+  </div>
 </section>
 
 <!-- TEAM -->
 <section id="team" class="team">
-    <h2 class="section-title">Meet Our Team</h2>
+  <div class="container">
+    <h2 class="section-title">Leadership & experts</h2>
+    <div class="section-subhead">Registered surveyors, geomatics engineers, and GIS specialists with decades of combined experience</div>
     <div class="team-grid">
-        <div class="team-card animate-up">
-            <img src="assets/images/team1.jpg" alt="Team Member">
-            <h3>Jane Doe</h3>
-            <p>CEO & Founder</p>
-        </div>
-        <div class="team-card animate-up delay-1">
-            <img src="assets/images/team2.jpg" alt="Team Member">
-            <h3>John Smith</h3>
-            <p>Lead Consultant</p>
-        </div>
-        <div class="team-card animate-up delay-2">
-            <img src="assets/images/team3.jpg" alt="Team Member">
-            <h3>Mary Johnson</h3>
-            <p>Project Manager</p>
-        </div>
+      <div class="team-card"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Jane Doe"><h3>Surv. Christopher, Yinka Philip</h3><p>CEO / Chief Surveyor</p><small>MNIS, R. SURV</small></div>
+      <div class="team-card"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith"><h3>Dr. John Adebayo</h3><p>Director of Geoinformatics</p><small>PhD GIS & Remote Sensing</small></div>
+      <div class="team-card"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Mary Johnson"><h3>Mary Nwachukwu</h3><p>Lead Hydrographer</p><small>Cert. Marine Surveyor</small></div>
     </div>
+  </div>
 </section>
 
 <!-- CTA -->
 <section class="cta">
-    <h2>Ready to Work With Us?</h2>
-    <p>Let us help you transform your organization.</p>
-    <a href="#contact" class="btn">Contact Us</a>
+  <div class="container" style="text-align: center;">
+    <h2 style="color:white; font-size: 2rem;">Ready to elevate your next project?</h2>
+    <p style="margin: 1rem auto; max-width: 550px;">Get accurate land data, reduce risks, and meet deadlines with our survey precision.</p>
+    <a href="mailto:tosphygeospatial@gmail.com" class="btn" style="background: white; color:#ff6a00;">Speak to an expert <i class="fa-solid fa-headset"></i></a>
+  </div>
 </section>
 
 <!-- CONTACT -->
-<section class="contact-section">
-
-<div class="contact-header">
-
-<span class="contact-badge">
-<i class="fa-solid fa-circle"></i> CONTACT
-</span>
-
-<h2>Get in Touch</h2>
-
-<p>
-Ready to start your survey project? Reach out through any of the channels below
-</p>
-
-</div>
-<div class="contact-grid">
-<!-- PHONE -->
-<div class="contact-card">
-
-<div class="icon">
-<i class="fa-solid fa-phone"></i>
-</div>
-
-<div>
-<h4>Phone</h4>
-<p>+2348146620063</p>
-<span>Mon-Fri 8am-6pm · Tap to call</span>
-</div>
-
-</div>
-
-
-<!-- WHATSAPP -->
-<div class="contact-card">
-
-<div class="icon">
-<i class="fa-brands fa-whatsapp"></i>
-</div>
-
-<div>
-<h4>WhatsApp</h4>
-<p>Chat with us directly</p>
-<span>Opens WhatsApp app or web</span>
-</div>
-
-</div>
-
-
-<!-- EMAIL -->
-<div class="contact-card">
-
-<div class="icon">
-<i class="fa-solid fa-envelope"></i>
-</div>
-
-<div>
-<h4>Email</h4>
-<p>topsy@gmail.com</p>
-<span>Click to send email</span>
-</div>
-
-</div>
-
-
-<!-- OFFICE -->
-<div class="contact-card">
-
-<div class="icon">
-<i class="fa-solid fa-location-dot"></i>
-</div>
-
-<div>
-<h4>Office</h4>
-<p>Suite 303, Oyemekun Commercial Complex</p>
-<span>Akure, Nigeria · Tap for directions</span>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="contact-cta">
-
-<a href="tel:+2348146620063" class="call-btn">
-Call Us Now
-</a>
-
-</div>
-
+<section id="contact" class="contact-section">
+  <div class="container">
+    <h2 class="section-title">Connect with TGS</h2>
+    <div class="contact-grid">
+      <div class="contact-card"><i class="fa-solid fa-phone-alt"></i><div><strong>Call</strong><br>+2348067955093</div></div>
+      <div class="contact-card"><i class="fa-solid fa-phone-alt"></i><div><strong>Call</strong><br>+2348131192408</div></div>
+      <div class="contact-card"><i class="fa-brands fa-whatsapp"></i><div><strong>WhatsApp</strong><br>+2348058566926</div></div>
+      <div class="contact-card"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><br>tosphygeospatial@gmail.com</div></div>
+      <div class="contact-card"><i class="fa-solid fa-location-dot"></i><div><strong>Head Office</strong><br>Lekki, Lagos Nigeria</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-    <p>© 2026 Topsy Ltd</p>
+  <p>© 2026 TGS — Survey & Geoinformatics. Precision you can build on. <a href="./admin/login.html" class="bttn">Admin</a></p>
 </footer>
 
-<!-- Firebase & Swiper JS -->
-<script type="module" src="./scripts/firebasePortfolio.js">
+<!-- Firebase + Firestore Import (dynamic portfolio) -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
+  // Firebase Config (same as admin)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCTY5xdHocWcWWA29cjuqnKsSL5c8-LNdU",
+    authDomain: "topsy-bf414.firebaseapp.com",
+    projectId: "topsy-bf414",
+    storageBucket: "topsy-bf414.firebasestorage.app",
+    messagingSenderId: "525110262091",
+    appId: "1:525110262091:web:6fe880db6c3d22aec0d0ce",
+    measurementId: "G-XBBL95MGYW"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const portfolioContainer = document.getElementById("portfolioContainer");
+
+  async function loadProjectsFromFirebase() {
+    try {
+      const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+      const querySnapshot = await getDocs(q);
+      
+      if (querySnapshot.empty) {
+        portfolioContainer.innerHTML = `<div class="empty-message"><i class="fa-regular fa-folder-open"></i> No projects yet. Check back soon!</div>`;
+        return;
+      }
+
+      portfolioContainer.innerHTML = "";
+      
+      querySnapshot.forEach((docSnap) => {
+        const project = docSnap.data();
+        // Build card using the modern design matching requested style
+        const card = document.createElement("div");
+        card.className = "portfolio-card";
+        
+        // Use fields: title, location, tag, description, statsLeft, statsRight, image
+        const title = project.title || "Untitled Project";
+        const location = project.location || "Nigeria";
+        const tag = project.tag || "Survey";
+        const description = project.description || "Precision survey and mapping project delivered with excellence.";
+        const statsLeft = project.statsLeft || "Precision";
+        const statsRight = project.statsRight || "Certified";
+        const imageUrl = project.image || "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=600&auto=format";
+        
+        card.innerHTML = `
+          <div class="portfolio-img">
+            <img src="${imageUrl}" alt="${title}" onerror="this.src='https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=600'">
+          </div>
+          <div class="portfolio-info">
+            <span class="portfolio-tag">${escapeHtml(tag)}</span>
+            <h3>${escapeHtml(title)}</h3>
+            <div class="portfolio-location"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(location)}</div>
+            <div class="portfolio-desc">${escapeHtml(description.length > 110 ? description.substring(0, 110) + '…' : description)}</div>
+            <div class="portfolio-stats">
+              <span><i class="fa-regular fa-chart-bar"></i> ${escapeHtml(statsLeft)}</span>
+              <span><i class="fa-regular fa-compass"></i> ${escapeHtml(statsRight)}</span>
+            </div>
+          </div>
+        `;
+        portfolioContainer.appendChild(card);
+      });
+    } catch (error) {
+      console.error("Firebase load error:", error);
+      portfolioContainer.innerHTML = `<div class="empty-message"><i class="fa-regular fa-circle-exclamation"></i> Unable to load projects. Please refresh.</div>`;
+    }
+  }
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // Load projects on page load
+  loadProjectsFromFirebase();
+
+  // Mobile menu toggle (non-blocking)
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+  if (hamburger) {
+    hamburger.onclick = (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle("active");
+    };
+    const navLinks = navMenu.querySelectorAll("a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => navMenu.classList.remove("active"));
+    });
+  }
+  document.addEventListener("click", (event) => {
+    if (navMenu && navMenu.classList.contains("active") && !navMenu.contains(event.target) && !hamburger.contains(event.target)) {
+      navMenu.classList.remove("active");
+    }
+  });
+
+  // Active nav highlight on scroll
+  const sections = document.querySelectorAll("section[id]");
+  window.addEventListener("scroll", () => {
+    let current = "";
+    const scrollPos = window.scrollY + 150;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (scrollPos >= sectionTop) current = section.getAttribute("id");
+    });
+    const navLinksAll = document.querySelectorAll("#navMenu ul li a");
+    navLinksAll.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") && link.getAttribute("href").includes(current)) {
+        link.classList.add("active");
+      }
+    });
+  });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="./scripts/animations.js"></script>
 </body>
 </html>

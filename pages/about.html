@@ -2,172 +2,650 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About | Eagles Height Consulting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>About | TGS Precision Survey & Geoinformatics</title>
 
-<link rel="stylesheet" href="../styles/about.css">
+<!-- Google Fonts + Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+<style>
+  /* ==========================
+     RESET & GLOBAL (matches homepage)
+  ========================== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #1e2a2e;
+    line-height: 1.5;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+
+  /* Buttons (matching homepage) */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2.2rem;
+    font-weight: 600;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    background: #ff6a00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .btn:hover {
+    background: #e05f00;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 106, 0, 0.25);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.6rem;
+    font-weight: 600;
+    border-radius: 40px;
+    text-decoration: none;
+    border: 2px solid #ff6a00;
+    color: #ff6a00;
+    background: transparent;
+    transition: 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: #ff6a00;
+    color: white;
+  }
+
+  /* ==========================
+     NAVBAR (MATCH HOMEPAGE)
+  ========================== */
+  .navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .logo img {
+    height: 52px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  .nav-menu ul {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+
+  .nav-menu ul li a {
+    text-decoration: none;
+    color: #1e2a2e;
+    font-weight: 500;
+    transition: 0.2s;
+    font-size: 0.95rem;
+  }
+
+  .nav-menu ul li a:hover,
+  .nav-menu ul li a.active {
+    color: #ff6a00;
+  }
+
+  .hamburger {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #ff6a00;
+  }
+
+  @media (max-width: 900px) {
+    .hamburger {
+      display: block;
+    }
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75%;
+      max-width: 300px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: -8px 0 25px rgba(0, 0, 0, 0.1);
+      padding: 7rem 2rem;
+      transition: right 0.3s ease;
+      z-index: 1001;
+    }
+    .nav-menu.active {
+      right: 0;
+    }
+    .nav-menu ul {
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+    .navbar {
+      padding: 0.9rem 5%;
+    }
+  }
+
+  /* ==========================
+     HERO SECTION (ABOUT)
+  ========================== */
+  .about-hero {
+    background: linear-gradient(105deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.35) 100%), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 5%;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #ff6a00;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-hero h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .about-hero p {
+    font-size: 1.2rem;
+    opacity: 0.92;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ==========================
+     WHO WE ARE SECTION
+  ========================== */
+  .who-we-are {
+    padding: 5rem 0;
+    background: #ffffff;
+  }
+
+  .about-grid {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .about-text {
+    flex: 1.2;
+  }
+
+  .about-text h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: #1e2a2e;
+  }
+
+  .about-text p {
+    margin-bottom: 1rem;
+    color: #4a5b5e;
+    line-height: 1.6;
+  }
+
+  .about-image {
+    flex: 0.9;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* ==========================
+     VALUES SECTION (cards like homepage)
+  ========================== */
+  .values {
+    padding: 5rem 0;
+    background: #fafaf8;
+  }
+
+  .section-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #1e2a2e;
+  }
+
+  .section-subhead {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 3rem auto;
+    color: #4a5b5e;
+    font-size: 1.05rem;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .value-card {
+    background: white;
+    padding: 2rem 1.8rem;
+    border-radius: 24px;
+    text-align: center;
+    border: 1px solid #eef2f0;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 12px -8px rgba(0, 0, 0, 0.02);
+  }
+
+  .value-card:hover {
+    transform: translateY(-6px);
+    border-color: #ff6a00;
+    box-shadow: 0 20px 30px -12px rgba(255, 106, 0, 0.12);
+  }
+
+  .value-card i {
+    font-size: 2.5rem;
+    color: #ff6a00;
+    margin-bottom: 1rem;
+  }
+
+  .value-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .value-card p {
+    color: #5f6c64;
+    line-height: 1.5;
+  }
+
+  /* ==========================
+     TECHNOLOGY SECTION
+  ========================== */
+  .technology {
+    padding: 5rem 0;
+    background: white;
+    text-align: center;
+  }
+
+  .tech-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .technology h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .technology > .container > p {
+    color: #4a5b5e;
+    max-width: 650px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .tech-list {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .tech-item {
+    padding: 0.7rem 1.6rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 60px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: 0.2s;
+    color: #1e2a2e;
+  }
+
+  .tech-item:hover {
+    border-color: #ff6a00;
+    color: #ff6a00;
+    transform: translateY(-2px);
+  }
+
+  /* ==========================
+     STATS SECTION (trust indicators)
+  ========================== */
+  .stats-section {
+    padding: 3rem 0;
+    background: #fff9f5;
+  }
+
+  .stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .stat-item h3 {
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: #ff6a00;
+  }
+
+  .stat-item p {
+    color: #4a5b5e;
+    font-weight: 500;
+  }
+
+  /* ==========================
+     CTA SECTION
+  ========================== */
+  .about-cta {
+    background: #ff6a00;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-radius: 0;
+  }
+
+  .about-cta h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .about-cta p {
+    margin-bottom: 1.5rem;
+    opacity: 0.92;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: white;
+    color: #ff6a00;
+    padding: 0.9rem 2rem;
+    border-radius: 40px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+
+  .cta-btn:hover {
+    background: #fff3e8;
+    transform: translateY(-2px);
+  }
+
+  /* ==========================
+     FOOTER
+  ========================== */
+  footer {
+    background: #0f2125;
+    color: #cbd5d0;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+  }
+
+  /* ==========================
+     RESPONSIVE
+  ========================== */
+  @media (max-width: 768px) {
+    .about-hero h1 {
+      font-size: 2.2rem;
+    }
+    .section-title {
+      font-size: 1.8rem;
+    }
+    .about-grid {
+      flex-direction: column;
+    }
+    .stats-grid {
+      gap: 2rem;
+    }
+    .stat-item h3 {
+      font-size: 2rem;
+    }
+  }
+</style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAVBAR (with working navigation - SIMPLE FIX) -->
 <header class="navbar">
-    <div class="logo">Topsy</div>
-    <nav>
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="./pages/about.html">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <div class="logo">
+    <img src="../media/TGS.png" alt="TGS Logo" style="height: 48px;" id="logoHomeLink">
+  </div>
+  <div class="hamburger" id="hamburger">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+  <nav class="nav-menu" id="navMenu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section class="about-hero">
-
-<span class="badge">ABOUT</span>
-
-<h1>Professional Land Surveying & Consulting</h1>
-
-<p>
-Eagles Height Consulting delivers reliable, accurate and legally
-compliant surveying solutions using modern technology.
-</p>
-
+  <div class="hero-content">
+    <span class="badge">ABOUT TGS</span>
+    <h1>Precision, Trust & Innovation in Surveying</h1>
+    <p>Delivering reliable geospatial intelligence and legally compliant surveying solutions for over a decade.</p>
+  </div>
 </section>
 
-
-<!-- COMPANY OVERVIEW -->
-
-<section class="about-company">
-
-<div class="about-grid">
-
-<div class="about-text">
-
-<h2>Who We Are</h2>
-
-<p>
-Eagles Height Consulting Ltd is a professional surveying and
-consulting firm providing high-quality geospatial services
-to individuals, businesses and institutions.
-</p>
-
-<p>
-Our team combines technical expertise with modern surveying
-technology to deliver dependable data for property development,
-construction and infrastructure projects.
-</p>
-
-</div>
-
-<div class="about-image">
-
-<img src="../assets/about.jpg">
-
-</div>
-
-</div>
-
+<!-- WHO WE ARE -->
+<section class="who-we-are">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Who We Are</h2>
+        <p><strong>TGS (Eagles Height Consulting Ltd)</strong> is a premier professional surveying and geoinformatics firm providing high-precision cadastral, engineering, and hydrographic services across Nigeria. We combine technical excellence with cutting-edge technology to empower infrastructure, real estate, and energy sectors.</p>
+        <p>Our team of registered surveyors, GIS specialists, and geomatics engineers brings decades of combined experience, ensuring every project meets rigorous legal and quality standards. From land subdivision to complex setting-out for gas facilities, we deliver data you can build on.</p>
+        <a href="services.html" class="btn-outline">Explore our expertise <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Surveyor at work with total station">
+      </div>
+    </div>
+  </div>
 </section>
 
-
-<!-- VALUES -->
-
+<!-- VALUES SECTION (Cards matching homepage style) -->
 <section class="values">
-
-<div class="values-grid">
-
-<div class="value-card">
-
-<i class="fa-solid fa-bullseye"></i>
-
-<h3>Our Mission</h3>
-
-<p>
-To deliver accurate surveying and consulting services that
-support responsible development and informed decision-making.
-</p>
-
-</div>
-
-
-<div class="value-card">
-
-<i class="fa-solid fa-eye"></i>
-
-<h3>Our Vision</h3>
-
-<p>
-To become a trusted leader in surveying and geospatial
-consulting across Nigeria and beyond.
-</p>
-
-</div>
-
-
-<div class="value-card">
-
-<i class="fa-solid fa-handshake"></i>
-
-<h3>Our Commitment</h3>
-
-<p>
-We focus on professionalism, precision and customer
-satisfaction in every project we deliver.
-</p>
-
-</div>
-
-</div>
-
+  <div class="container">
+    <h2 class="section-title">Our Core Values</h2>
+    <div class="section-subhead">Guided by integrity, precision, and a relentless commitment to client success</div>
+    <div class="values-grid">
+      <div class="value-card">
+        <i class="fa-solid fa-bullseye"></i>
+        <h3>Mission</h3>
+        <p>To deliver accurate surveying and geospatial consulting that supports responsible development, legal certainty, and informed decision-making across Africa.</p>
+      </div>
+      <div class="value-card">
+        <i class="fa-solid fa-eye"></i>
+        <h3>Vision</h3>
+        <p>To become the most trusted geospatial partner in Nigeria and beyond — known for innovation, reliability, and technical mastery.</p>
+      </div>
+      <div class="value-card">
+        <i class="fa-solid fa-handshake"></i>
+        <h3>Commitment</h3>
+        <p>Professionalism, confidentiality, and customer satisfaction in every project — from small land surveys to large infrastructure mapping.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- TRUST STATS (matching homepage stats style) -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item"><h3>150+</h3><p>Projects Completed</p></div>
+      <div class="stat-item"><h3>98%</h3><p>Client Retention</p></div>
+      <div class="stat-item"><h3>12+</h3><p>Years Experience</p></div>
+      <div class="stat-item"><h3>±2mm</h3><p>Precision Grade</p></div>
+    </div>
+  </div>
+</section>
 
-
-<!-- TECHNOLOGY -->
-
+<!-- TECHNOLOGY SECTION -->
 <section class="technology">
-
-<div class="tech-container">
-
-<h2>Technology & Innovation</h2>
-
-<p>
-We use modern surveying tools and digital mapping technologies
-to ensure accurate measurements, reliable spatial data and
-efficient project delivery.
-</p>
-
-<div class="tech-list">
-
-<div class="tech-item">GPS Surveying</div>
-<div class="tech-item">Total Station</div>
-<div class="tech-item">GIS Mapping</div>
-<div class="tech-item">Drone Survey</div>
-
-</div>
-
-</div>
-
+  <div class="container">
+    <h2>Technology & Innovation</h2>
+    <p>We invest in modern surveying equipment and digital workflows to ensure accurate measurements, reliable spatial data, and efficient project turnaround.</p>
+    <div class="tech-list">
+      <span class="tech-item"><i class="fa-solid fa-satellite-dish"></i> GPS/GNSS</span>
+      <span class="tech-item"><i class="fa-solid fa-microchip"></i> Total Station</span>
+      <span class="tech-item"><i class="fa-solid fa-map"></i> GIS Mapping</span>
+      <span class="tech-item"><i class="fa-solid fa-drone"></i> UAV / Drone Surveys</span>
+      <span class="tech-item"><i class="fa-solid fa-draw-polygon"></i> 3D Laser Scanning</span>
+    </div>
+  </div>
 </section>
 
-
-<!-- CTA -->
-
+<!-- CTA SECTION -->
 <section class="about-cta">
-
-<h2>Need Accurate Surveying Services?</h2>
-
-<p>Contact our experts today to discuss your project.</p>
-
-<a href="../contact.html" class="cta-btn">Contact Us</a>
-
+  <h2>Ready to start your next project?</h2>
+  <p>Get accurate land data, reduce risks, and meet deadlines with TGS precision.</p>
+  <a href="mailto:psalmstringss@gmail.com" class="cta-btn">Request a quote <i class="fa-solid fa-arrow-right"></i></a>
 </section>
+    
+<footer>
+  <p>© 2026 TGS — Survey & Geoinformatics. Precision you can build on.</p>
+</footer>
 
+<script>
+  // SIMPLE FIXED NAVIGATION - Works for all page locations
+  
+  // Mobile menu toggle
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+
+  if (hamburger) {
+    hamburger.onclick = (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle("active");
+    };
+    const navLinks = navMenu.querySelectorAll("a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+      });
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    if (navMenu && navMenu.classList.contains("active") && !navMenu.contains(event.target) && !hamburger.contains(event.target)) {
+      navMenu.classList.remove("active");
+    }
+  });
+
+  // Logo click navigation
+  const logo = document.getElementById("logoHomeLink");
+  if (logo) {
+    logo.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  }
+
+  // Get the current directory path to determine correct links
+  const currentPath = window.location.pathname;
+  const isInPagesFolder = currentPath.includes('/pages/');
+  
+  // If we're in the pages folder, fix all navigation links
+  if (isInPagesFolder) {
+    // Update all navigation anchor tags to point to parent directory
+    const allNavLinks = document.querySelectorAll('.nav-menu ul li a');
+    allNavLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('http') && !href.startsWith('mailto')) {
+        if (href === 'index.html') {
+          link.setAttribute('href', '../index.html');
+        } else if (href === 'about.html') {
+          link.setAttribute('href', '../about.html');
+        } else if (href === './pages/services.html') {
+          link.setAttribute('href', '../services.html');
+        } else if (href === './pages/projects.html') {
+          link.setAttribute('href', '../projects.html');
+        } else if (href === 'index.html#contact') {
+          link.setAttribute('href', '../index.html#contact');
+        }
+      }
+    });
+    
+    // Update the "Explore our expertise" button
+    const exploreBtn = document.querySelector('.btn-outline');
+    if (exploreBtn) {
+      exploreBtn.setAttribute('href', './pages/services.html');
+    }
+  }
+  
+  // Set active class based on current page filename
+  const currentFile = currentPath.split('/').pop();
+  const allNavItems = document.querySelectorAll('.nav-menu ul li a');
+  allNavItems.forEach(link => {
+    link.classList.remove('active');
+    const linkHref = link.getAttribute('href');
+    if (linkHref) {
+      const linkFile = linkHref.split('/').pop().split('#')[0];
+      if (linkFile === currentFile || (currentFile === '' && linkFile === 'index.html')) {
+        link.classList.add('active');
+      }
+    }
+  });
+</script>
 </body>
 </html>
